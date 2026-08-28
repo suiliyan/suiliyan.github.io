@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liyan Sui - Academic Homepage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f7f9fc;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-name {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            font-size: 1em;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #2e86de;
+        }
+
+        .theme-toggle {
+            font-size: 1.2em;
+            cursor: pointer;
+            color: #555;
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 60px;
+            padding: 40px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .profile-card {
+            text-align: center;
+        }
+
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4em;
+            font-weight: bold;
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 74% center;
+            transform: scale(1.18);
+            transform-origin: center center;
+        }
+
+        .profile-name {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .profile-title {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .profile-info {
+            text-align: left;
+            margin-top: 25px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .info-item svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .social-links {
+            margin-top: 25px;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 20px;
+        }
+
+        .social-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95em;
+        }
+
+        .social-item:hover {
+            color: #2e86de;
+        }
+
+        .social-item svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        /* Main Content */
+        .content {
+            max-width: 900px;
+        }
+
+        section {
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .biography {
+            line-height: 1.8;
+            color: #444;
+            font-size: 1.05em;
+            text-align: justify;
+        }
+
+        .biography p {
+            margin-bottom: 15px;
+        }
+
+        .biography a {
+            color: #2e86de;
+            text-decoration: none;
+        }
+
+        .biography a:hover {
+            text-decoration: underline;
+        }
+
+        /* Education & Experience */
+        .timeline-item {
+            margin-bottom: 25px;
+        }
+
+        .timeline-item ul {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+
+        .timeline-item li {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 5px;
+        }
+
+        .timeline-period {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .timeline-title {
+            color: #555;
+            margin-left: 20px;
+        }
+
+        /* News */
+        .news-list {
+            border-left: 3px solid #e0e0e0;
+            padding-left: 20px;
+            padding-right: 12px;
+            margin-top: 10px;
+            max-height: 270px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #b7c8dc #f7f9fc;
+        }
+
+        .news-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .news-list::-webkit-scrollbar-track {
+            background: #f7f9fc;
+            border-radius: 10px;
+        }
+
+        .news-list::-webkit-scrollbar-thumb {
+            background: #b7c8dc;
+            border-radius: 10px;
+        }
+
+        .news-list::-webkit-scrollbar-thumb:hover {
+            background: #2e86de;
+        }
+
+        .news-item {
+            display: grid;
+            grid-template-columns: 28px 95px 1fr;
+            column-gap: 8px;
+            align-items: start;
+            margin-bottom: 16px;
+            line-height: 1.7;
+            color: #555;
+            font-size: 0.98em;
+        }
+
+        .news-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .news-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            font-size: 1.05em;
+            line-height: 1;
+            margin-top: 2px;
+        }
+
+        .news-date {
+            display: inline-block;
+            min-width: 95px;
+            font-weight: 600;
+            color: #2e86de;
+        }
+
+        .news-text {
+            display: inline-block;
+        }
+
+        /* Research Interests */
+        .interests-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .interest-tag {
+            background-color: #f0f0f0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: #555;
+            font-size: 0.95em;
+            transition: all 0.3s;
+        }
+
+        .interest-tag:hover {
+            background-color: #2e86de;
+            color: white;
+        }
+
+        /* Publications */
+        .publication-item {
+            margin-bottom: 20px;
+            line-height: 1.7;
+            font-size: 0.98em;
+            color: #444;
+        }
+
+        .publication-item strong {
+            color: #333;
+        }
+
+        /* Awards */
+        .award-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .award-item:last-child {
+            border-bottom: none;
+        }
+
+        .award-year {
+            font-weight: 600;
+            color: #2e86de;
+            min-width: 100px;
+            flex-shrink: 0;
+        }
+
+        .award-description {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            nav {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                font-size: 0.9em;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-name {
+                font-size: 1.2em;
+            }
+
+            .nav-links a {
+                font-size: 0.85em;
+            }
+
+            .main-container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            .news-item {
+                grid-template-columns: 28px 1fr;
+                column-gap: 8px;
+            }
+
+            .news-icon {
+                grid-row: 1 / span 2;
+            }
+
+            .news-date {
+                min-width: 0;
+            }
+
+            .news-text {
+                grid-column: 2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-name">Liyan Sui</a>
+            <div class="nav-links">
+                <a href="#biography">Biography</a>
+                <a href="#news">News</a>
+                <a href="#publications">Publications</a>
+                <a href="#awards">Work in Process</a>
+                <a href="#experience">Experience</a>
+                <a href="#education">Education</a>
+                <span class="theme-toggle">⚙️</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="profile-card">
+                <div class="profile-photo">
+                    <img src="profile.jpg" alt="Liyan Sui">
+                </div>
+                <h1 class="profile-name">Liyan Sui</h1>
+                <p class="profile-title">
+Ph.D. Student<br>
+University of Electronic Science and Technology of China<br>
+Information and Communication Engineering
+</p>
+                
+                <div class="profile-info">
+                    <div class="info-item">
+                        <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+                        <span>China</span>
+                    </div>
+                    <div class="info-item">
+                        <svg fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+                        <span>University of Electronic Science and Technology of China</span>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="mailto:202311012319@std.uestc.edu.cn" class="social-item">
+                        <svg fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+                        <span>Email: 202311012319@std.uestc.edu.cn</span>
+                    </a>
+                    <a href="resume.pdf" target="_blank" class="social-item">
+                        <span>📄</span>
+                        <span>CV / Resume</span>
+                    </a>
+                    <a href="https://scholar.google.com/citations?user=sawILOgAAAAJ&hl=zh-CN" target="_blank" class="social-item">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/></svg>
+                        <span>Google Scholar</span>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <main class="content">
+            <section id="biography">
+                <h2>Biography</h2>
+                <div class="biography">
+                    <p>I am a Ph.D. student in Information and Communication Engineering at <a href="https://www.uestc.edu.cn/" target="_blank">University of Electronic Science and Technology of China (UESTC)</a>. I am currently a visiting student in Electrical and Electronic Engineering at <a href="https://www.ntu.edu.sg/" target="_blank">Nanyang Technological University (NTU)</a>, Singapore.
+                    <p>My research focuses on deep learning algorithms for optimization in edge computing networks. My interests include edge intelligence, mobile edge computing, computing power networks, privacy-preserving resource allocation, and trustworthy task offloading in dynamic network environments.</p>
+                </div>
+            </section>
+
+            <section id="news">
+                <h2>News</h2>
+                
+                <div class="news-list">
+                    <div class="news-item">
+                        <span class="news-icon" aria-hidden="true">🎉</span>
+                        <span class="news-date">2026.06</span>
+                        <span class="news-text">One paper accepted by<em>IEEE International Symposium on Personal, Indoor and Mobile Radio Communications (PIMRC)</em>.</span>
+                    </div>
+                    <div class="news-item">
+                        <span class="news-icon" aria-hidden="true">🎉</span>
+                        <span class="news-date">2025.11</span>
+                        <span class="news-text">Started visiting study in Electrical and Electronic Engineering at <em>Nanyang Technological University</em>.</span>
+                    </div>
+                    <div class="news-item">
+                        <span class="news-icon" aria-hidden="true">🎉</span>
+                        <span class="news-date">2025.10</span>
+                        <span class="news-text">One paper published by <em>IEEE Transactions on Cloud Computing</em> (TCC).</span>
+                    </div>
+                    <div class="news-item">
+                        <span class="news-icon" aria-hidden="true">🎉</span>
+                        <span class="news-date">2025.07</span>
+                        <span class="news-text">One paper published by <em>IEEE Network</em>.</span>
+                    </div>
+                    <div class="news-item">
+                        <span class="news-icon" aria-hidden="true">🏆</span>
+                        <span class="news-date">2023.05</span>
+                        <span class="news-text">One paper published by <em>IEEE Transactions on Industrial Informatics</em>（TII）.</span>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="education">
+                <h2>Education</h2>
+                <div class="timeline-item">
+                    <div class="timeline-period">Sep. 2023 - Present: Ph.D. in Information and Communication Engineering</div>
+                    <ul>
+                        <li>University of Electronic Science and Technology of China</li>
+                        <li>Supervisor: <a href="https://scholar.google.com.sg/citations?hl=zh-CN&user=PT1-F1QAAAAJ" target="_blank">Prof. Yan Zhang</a> (IEEE Fellow)</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-period">Nov. 2025 - Nov. 2026: Visiting Student in Electrical and Electronic Engineering</div>
+                    <ul>
+                        <li>Nanyang Technological University, Singapore</li>
+                        <li>Host Supervisor: <a href="https://scholar.google.com.sg/citations?user=7VLbLUMAAAAJ&hl=en" target="_blank">Prof. Chau Yuen</a> (IEEE Fellow)</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-period">Sep. 2020 - Jun. 2023: Master in Cyberspace Security</div>
+                    <ul>
+                        <li>Heilongjiang University</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-period">Sep. 2015 - Jun. 2019: Bachelor in Information Security</div>
+                    <ul><li>Qingdao University</li></ul>
+                </div>
+            </section>
+
+            <section id="experience">
+                <h2>Experience</h2>
+                <div class="timeline-item">
+                    <div class="timeline-period">Jan. 2025 - Present: Key Laboratory for Computing Power Networks and Information Security, Ministry of Education of China</div>
+                    <ul>
+                        <li>Research project: Secure and Trustworthy Offloading in Vehicular Computing Power Networks</li>
+                        <li>Studied privacy protection for computational power information and energy-efficient task offloading.</li>
+                        <li>Integrated graph neural networks and reinforcement learning for trustworthy adaptive decision-making.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-period">Sep. 2022 - Jun. 2023: State Grid Corporation of China</div>
+                    <ul>
+                        <li>Research project: Market-Based Strategies for Enhancing Renewable Energy Integration under the Dual-Carbon Goals.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-period">Jul. 2022 - May 2023: State Grid Corporation of China</div>
+                    <ul>
+                        <li>Research project: Low-Carbon Dispatching Strategies for New-Type Power Systems under the Dual-Carbon Goals.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="research-interests">
+                <h2>Research Interests</h2>
+                <div class="interests-list">
+                    <span class="interest-tag">Edge Intelligence</span>
+                    <span class="interest-tag">Mobile Edge Computing (MEC)</span>
+                    <span class="interest-tag">Computing Power Networks</span>
+                    <span class="interest-tag">Privacy-Preserving Resource Allocation</span>
+                    <span class="interest-tag">Trustworthy Task Offloading</span>
+                    <span class="interest-tag">Deep Learning</span>
+                    <span class="interest-tag">Vehicular Computing Networks</span>
+                </div>
+            </section>
+
+            <section id="publications">
+                <h2>Publications</h2>
+
+                <div class="publication-item">
+                    [1] <strong>L. Sui</strong>, X. Huang, K. Zhang, Y. Zhang, F. Wu, X. Guan, S. Xu and Y. Zhang, "Energy-Privacy Tradeoff for Task Matching in Edge Computing Power Networks," <em>IEEE Transactions on Cloud Computing (TCC)</em>, vol. 13, no. 4, pp. 1315-1326, 2025. <b>(JCR Q1, IF: 5.3)</b>
+                </div>
+
+                <div class="publication-item">
+                    [2] <strong>L. Sui</strong>, K. Zhang, F. Wu and X. Huang, "Large Models for Resource Allocation in Edge Computing Power Networks," <em>IEEE Network</em>, vol. 39, no. 4, pp. 82-89, 2025. <b>(JCR Q1, IF: 8.8)</b>
+                </div>
+
+                <div class="publication-item">
+                    [3] <strong>L. Sui</strong>, X. Guan, C. Cui, H. Jiang, H. Pan and T. Ohtsuki, "Graph Learning Empowered Situation Awareness in Internet of Energy With Graph Digital Twin," <em>IEEE Transactions on Industrial Informatics (TII)</em>, vol. 19, no. 5, pp. 7268-7277, 2023. <b>(JCR Q1, IF: 9.8)</b>
+                </div>
+
+                <div class="publication-item">
+                    [4] <strong>L. Sui</strong>, X. Huang, and Y. Zhang, "Task Rescheduling for Service Continuity in Vehicular Computing Power Networks," <em>IEEE International Symposium on Personal, Indoor and Mobile Radio Communications (PIMRC)</em>, accepted.
+                </div>
+
+            </section>
+
+            <section id="awards">
+                <h2>Work in Process</h2>
+                <div class="award-item">
+                    <span class="award-year">Under review</span>
+                    <span class="award-description"><strong>L. Sui</strong>, X. Huang, Y. Zhang and Y. Zhang, "Gated Federated Learning for Mobility-Aware Task Matching in Vehicular Computing Power Networks," <em>IEEE Transactions on Intelligent Transportation Systems (TITS)</em>.</span>
+                </div>
+                <div class="award-item">
+                    <span class="award-year">In preparation</span>
+                    <span class="award-description"><strong>L. Sui</strong>, et al., "Fault Tolerant Task Rescheduling in Vehicular Computing Power Networks," manuscript targeted for <em>IEEE Transactions on Mobile Computing (TMC)</em>.</span>
+                </div>
+  
+            </section>
+        </main>
+    </div>
+</body>
+</html>
